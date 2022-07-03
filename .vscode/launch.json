@@ -27,9 +27,16 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "C/C++: gcc build active file",
-            "miDebuggerPath": "/usr/bin/gdb",
-            "miDebuggerArgs": "-q -ex quit; wait() { fg >/dev/null; }; /bin/gdb -q --interpreter=mi"
+            "windows": {
+                "program": "${fileDirname}/${fileBasenameNoExtension}.exe",
+                "externalConsole": true,
+                "preLaunchTask": "gcc build active file windows",
+            },
+            "linux": {
+                "preLaunchTask": "gcc build active file linux",
+                "miDebuggerPath": "/usr/bin/gdb",
+                "miDebuggerArgs": "-q -ex quit; wait() { fg >/dev/null; }; /bin/gdb -q --interpreter=mi"
+            }
         }
     ]
 }
