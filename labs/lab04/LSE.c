@@ -1,3 +1,7 @@
+/*
+Implementação das funções utilizadas no trabalho para a LSE.
+*/
+
 #include "LSE.h"
 
 void print_list(ptLSE *ptLista)
