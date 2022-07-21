@@ -1,5 +1,5 @@
-#ifndef test_H_
-#define test_H_
+#ifndef LSE_H_
+#define LSE_H_
 
 /*
 Interface da Lista Simples Encadeada em C e suas funções.
