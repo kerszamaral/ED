@@ -11,31 +11,30 @@ Caso não esteja, ela remove o primeiro e o ultimo elemento da lista.
 
 int main(void)
 {
-    int num = -1;
-    ptLSE *ptLista = NULL;
+    int num = -1; //numero a ser inserido na lista
+    ptLSE *ptLista = criaLista(); //cria a lista
 
-    while (num !=0)
+    while (num !=0) //loop que pede o numero a ser inserido na lista
     {
-        print_list(ptLista);
-        printf("Digite um valor para inserir no inicio da lista(0 para sair): ");
-        scanf("%d", &num);
-        if (num != 0)
-            insere_normal(&ptLista, num);
+        print_list(ptLista); //imprime a lista
+        printf("Digite um valor para inserir no inicio da lista(0 para sair): "); //pede o numero a ser inserido na lista
+        scanf("%d", &num); //pega o numero a ser inserido na lista
+        if (num != 0) //se o numero nao for 0, insere o numero na lista
+            insere_normal(&ptLista, num); //insere o numero na lista
     }
 
-    num = -1;
-    while (num != 0)
+    num = -1; //numero a ser removido da lista
+    while (num != 0) //loop que faz a função maluca lá
     {
-        print_list(ptLista);
-        printf("Digite um valor (0 para sair): ");
-        scanf("%d", &num);
-        if (num != 0)
-            insere(&ptLista, num);
+        print_list(ptLista); //imprime a lista
+        printf("Digite um valor (0 para sair): "); //pede o numero a ser inserido na função maluca
+        scanf("%d", &num); // pega o numero a ser inserido na função maluca
+        if (num != 0) //Testa se o numero nao for 0
+            insere(&ptLista, num); //Executa a função
     }
-    
-    print_list(ptLista);
-    destroi(&ptLista); 
-    print_list(ptLista);
+    print_list(ptLista); //imprime a lista
+    destroi(&ptLista);  //destroi a lista
+    print_list(ptLista); //imprime a lista
 
     return 0;
 }

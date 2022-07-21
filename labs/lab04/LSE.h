@@ -8,18 +8,20 @@ Interface da Lista Simples Encadeada em C e suas funções.
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct tipoNo ptLSE;
-struct tipoNo {
-    int num;
-    ptLSE *prox;
+typedef struct tipoNo ptLSE; //tipo do nó da lista
+struct tipoNo { //estrutura do nó da lista
+    int num; //numero do nó
+    ptLSE *prox; //ponteiro para o nó seguinte
 };
 
-void print_list(ptLSE *ptLista);
+ptLSE *criaLista(); //cria a lista
 
-void insere(ptLSE **ptLista, int valor);
+void print_list(ptLSE *ptLista); //imprime a lista
 
-void destroi(ptLSE **ptLista);
+void insere(ptLSE **ptLista, int valor); //Função maluca
 
-void insere_normal(ptLSE **ptLista, int valor);
+void destroi(ptLSE **ptLista); //destroi a lista
+
+void insere_normal(ptLSE **ptLista, int valor); //insere o valor na lista
 
 #endif
