@@ -13,10 +13,18 @@ int insertABP(ABP **raiz, int info);
 
 int removeABP(ABP **raiz, int info);
 
-int searchABP(ABP *raiz, int info);
+ABP *searchABP(ABP *raiz, int info);
 
 int destroiABP(ABP **raiz);
 
-int displayABP(ABP *raiz, char mode);
+int displayABP(ABP *raiz, int mode);
+
+int compareABP(ABP *raiz, ABP *raiz2);
+
+int mirrorABP(ABP *raiz, ABP **raiz2);
+
+int isABP(ABP *raiz);
+
+int insertMirrorABP(ABP **raiz, int info);
 
 #endif
