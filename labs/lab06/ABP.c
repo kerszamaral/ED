@@ -291,6 +291,8 @@ int mirrorABP(ABP *raiz, ABP **raiz2)
         destroiABP(raiz2); //Destroi a arvore
         *raiz2 = (ABP *)malloc(sizeof(ABP)); //Aloca memoria para a arvore
         (*raiz2)->info = raiz->info; //Copia o valor da raiz
+        (*raiz2)->L = NULL; //Inicializa a subarvore esquerda com NULL
+        (*raiz2)->R = NULL; //Inicializa a subarvore direita com NULL
         mirrorABP(raiz->L, &((*raiz2)->R)); //Copia a subarvore da esquerda
         mirrorABP(raiz->R, &((*raiz2)->L)); //Copia a subarvore da direita
         return 1; //Retorna 1 para indicar que a arvore foi copiada com sucesso
@@ -307,13 +309,31 @@ int isABP(ABP *raiz)
     { //Se a arvore for uma folha
         return 1; //Retorna 1 para indicar que a arvore é uma arvore binaria de pesquisa
     }
-    else if (raiz->L == NULL || raiz->R == NULL)
+    else if (raiz->L == NULL)
     { //Se a arvore for uma folha
-        return 0; //Retorna 0 para indicar que a arvore não é uma arvore binaria de pesquisa
+        if (raiz->R->info > raiz->info)
+        {                          // Se a raiz for maior que a subarvore da direita
+            return isABP(raiz->R); // Retorna 1 se a subarvore da esquerda for uma arvore binaria de pesquisa
+        }
+        else
+        {
+            return 0; // Retorna 0 para indicar que a arvore nao é uma arvore binaria de pesquisa
+        }
+    }
+    else if (raiz->R == NULL)
+    {
+        if(raiz->L->info < raiz->info)
+        { //Se a raiz for maior que a subarvore da direita
+            return isABP(raiz->L); //Retorna 1 se a subarvore da esquerda for uma arvore binaria de pesquisa
+        }
+        else
+        {
+            return 0; //Retorna 0 para indicar que a arvore nao é uma arvore binaria de pesquisa
+        }
     }
     else if (raiz->L->info < raiz->info && raiz->R->info > raiz->info)
-    { //Se a arvore for uma arvore binaria de pesquisa
-        return isABP(raiz->L) && isABP(raiz->R); //Retorna 1 se as subarvores forem uma arvore binaria de pesquisa
+    {                                            // Se a arvore for uma arvore binaria de pesquisa
+        return isABP(raiz->L) && isABP(raiz->R); // Retorna 1 se as subarvores forem uma arvore binaria de pesquisa
     }
     else
     {
