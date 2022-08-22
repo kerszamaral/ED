@@ -10,6 +10,35 @@ typedef struct AVL
     int k;
 }AVL;
 
+int insertABP(AVL **raiz, int info)
+{
+    if (*raiz == NULL) 
+    {
+        *raiz = (AVL *)malloc(sizeof(AVL)); //Aloca memoria para a raiz
+        if(raiz == NULL)
+        {
+            return 0; //Retorna 0 para indicar que nao foi possivel alocar memoria
+        }
+        (*raiz)->info = info; //Insere o valor na raiz
+        (*raiz)->L = NULL; //Insere NULL na esquerda
+        (*raiz)->R = NULL; //Insere NULL na direita
+        (*raiz)->k = 0;
+        return 1;
+    }
+    else if (info < (*raiz)->info)
+    {
+        return insertABP(&((*raiz)->L), info); //Insere na esquerda
+    }
+    else if (info > (*raiz)->info)
+    {
+        return insertABP(&((*raiz)->R), info); //Insere na direita
+    }
+    else
+    {
+        return 0; //Retorna 0 para indicar que o valor ja existe na arvore
+    }
+}
+
 int Factor(AVL *root)
 {
     if (root == NULL)
@@ -17,6 +46,49 @@ int Factor(AVL *root)
         return 0;
     }
     return heightTree(root->L) - heightTree(root->R);
+}
+
+void _closestValue(AVL *root, int value, int *Closest)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    
+    if (root->info == value)
+    {
+        *Closest = root->info;
+        return;
+    }
+
+    if (root->info - *Closest < value - *Closest)
+    {
+        *Closest = root->info;
+    }
+    
+    if (root->L != NULL)
+    {
+        _closestValue(root->L, value, Closest);
+    }
+
+    if (root->R != NULL)
+    {
+        _closestValue(root->R, value, Closest);
+    }
+
+    return;
+}
+
+int closestValue(AVL *root, int value)
+{
+    if (root == NULL)
+    {
+        return 0;
+    }
+    int closest = root->info;
+    _closestValue(root->L, value, &closest);
+    _closestValue(root->R, value, &closest);
+    return closest;
 }
 
 AVL *sRotateR(AVL *root)

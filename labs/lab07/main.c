@@ -25,11 +25,12 @@ void menuUmaArv(AVL **raiz)
         // Criação das opções do menu
         printf("\n\n1 - Inserir\n");
         printf("2 - Imprimir\n");
-        printf("3 - Procurar\n");
+        printf("3 - Procurar e Retornar fator\n");
         printf("4 - Destroi\n");
         printf("5 - Contruir Arvore Positiva\n");
-        printf("6 - E AVL\n");
-        printf("7 - Sair\n");
+        printf("6 - É AVL\n");
+        printf("7 - Valor mais proximo\n");
+        printf("8 - Sair\n");
         printf("Digite uma opção: ");
         int opcao = -1;
         int valor = -1;
@@ -39,7 +40,7 @@ void menuUmaArv(AVL **raiz)
         case 1:
             printf("\nDigite o valor a ser inserido: ");
             scanf("%d", &valor);
-            if (!insertAVL(raiz, valor))
+            if (insertABP(raiz, valor))
             {
                 printf("\nValor inserido com sucesso!\n");
             }
@@ -62,13 +63,14 @@ void menuUmaArv(AVL **raiz)
         case 3:
             printf("\nDigite o valor a ser procurado: ");
             scanf("%d", &valor);
-            if (searchTree(*raiz, valor) == NULL)
+            AVL *temp = searchTree(*raiz, valor);
+            if (temp == NULL)
             {
                 printf("\nValor não encontrado\n");
             }
             else
             {
-                printf("\nValor encontrado\n");
+                printf("\nFator do nó: %d\n", Factor(temp));
             }
             break;
         case 4:
@@ -89,7 +91,7 @@ void menuUmaArv(AVL **raiz)
                 scanf("%d", &valor);
                 if (valor > 0)
                 {
-                    insertAVL(raiz, valor);
+                    insertABP(raiz, valor);
                     displayTree(*raiz, 1);
                 }
             } while (valor > 0);
@@ -97,14 +99,19 @@ void menuUmaArv(AVL **raiz)
         case 6:
             if (is_avl(*raiz))
             {
-                printf("\nArvore é uma ABP\n");
+                printf("\nArvore é uma AVL\n");
             }
             else
             {
-                printf("\nArvore não é uma ABP\n");
+                printf("\nArvore não é uma AVL\n");
             }
             break;
         case 7:
+            printf("\nDigite o valor a ser procurado: ");
+            scanf("%d", &valor);
+            printf("\nValor mais proximo: %d\n", closestValue(*raiz, valor));
+            break;
+        case 8:
             return; // Sair do menu
         default:
             printf("\nOpção inválida!\n");
