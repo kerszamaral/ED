@@ -5,6 +5,7 @@ Implementação de uma ABP e diversas funções relacionadas para o Lab 06.
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "trees.h"
 #include "AVL.h"
 
 void menuUmaArv(AVL **raiz);
