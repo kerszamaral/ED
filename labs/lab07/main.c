@@ -1,6 +1,6 @@
 /* Ian Kersz - Cartão UFRGS: 00338368
-11.08.22
-Implementação de uma ABP e diversas funções relacionadas para o Lab 06.
+21.08.22
+Implementação de uma AVL e diversas funções relacionadas para o Lab 07.
 */
 
 #include <stdio.h>

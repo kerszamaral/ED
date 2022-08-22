@@ -22,7 +22,7 @@ int insertABP(AVL **raiz, int info)
         (*raiz)->info = info; //Insere o valor na raiz
         (*raiz)->L = NULL; //Insere NULL na esquerda
         (*raiz)->R = NULL; //Insere NULL na direita
-        (*raiz)->k = 0;
+        (*raiz)->k = 0; //Insere 0 no fator de balanceamento
         return 1;
     }
     else if (info < (*raiz)->info)
@@ -43,52 +43,52 @@ int Factor(AVL *root)
 {
     if (root == NULL)
     {
-        return 0;
+        return 0; //Retorna 0 para indicar que nao existe nenhum valor na arvore  
     }
-    return heightTree(root->L) - heightTree(root->R);
+    return heightTree(root->L) - heightTree(root->R); //Retorna o fator de balanceamento
 }
 
 void _closestValue(AVL *root, int value, int *Closest)
 {
     if (root == NULL)
     {
-        return;
+        return; //Retorna se a arvore esta vazia
     }
     
     if (root->info == value)
     {
-        *Closest = root->info;
-        return;
+        *Closest = root->info; //Se o valor for igual ao valor procurado, o valor mais proximo eh o proprio valor
+        return; //Retorna
     }
 
     if (root->info - *Closest < value - *Closest)
     {
-        *Closest = root->info;
+        *Closest = root->info; //Se o valor for menor que o valor mais proximo, o valor mais proximo eh o proprio valor
     }
-    
+
     if (root->L != NULL)
     {
-        _closestValue(root->L, value, Closest);
+        _closestValue(root->L, value, Closest); //Procura na esquerda
     }
 
     if (root->R != NULL)
     {
-        _closestValue(root->R, value, Closest);
+        _closestValue(root->R, value, Closest); //Procura na direita
     }
 
-    return;
+    return; //Retorna
 }
 
 int closestValue(AVL *root, int value)
 {
     if (root == NULL)
     {
-        return 0;
+        return 0;   //Retorna 0 para indicar que nao existe nenhum valor na arvore
     }
-    int closest = root->info;
-    _closestValue(root->L, value, &closest);
-    _closestValue(root->R, value, &closest);
-    return closest;
+    int closest = root->info; //Inicializa o valor mais proximo com o valor da raiz
+    _closestValue(root->L, value, &closest); //Procura na esquerda
+    _closestValue(root->R, value, &closest); //Procura na direita
+    return closest; //Retorna o valor mais proximo
 }
 
 AVL *sRotateR(AVL *root)
@@ -250,14 +250,14 @@ int insertAVL(AVL **root, Typeinfo info)
 
 int is_avl(AVL *a)
 {
-    int alt_esq, alt_dir;
+    int alt_esq, alt_dir; //Altura da subarvore esquerda e direita
 
-    if (a != NULL)
+    if (a != NULL) 
     {
-        alt_esq = heightTree(a->L);
-        alt_dir = heightTree(a->R);
-        return ((alt_esq - alt_dir < 2) && (alt_dir - alt_esq < 2) && (is_avl(a->L)) && (is_avl(a->R)));
+        alt_esq = heightTree(a->L); //Altura da subarvore esquerda
+        alt_dir = heightTree(a->R); //Altura da subarvore direita
+        return ((alt_esq - alt_dir < 2) && (alt_dir - alt_esq < 2) && (is_avl(a->L)) && (is_avl(a->R))); //Verifica se a arvore e AVL
     }
     else
-        return 1;
+        return 1; //Arvore vazia e AVL
 }
